@@ -27,7 +27,7 @@ app.get("/:room", (req, res) => {
 io.on("connection", (socket) => {
   socket.on("join-room", (roomId, userId, userName) => {
     socket.join(roomId);
-    setTimeout(()=>{
+    setTimeout(() => {
       socket.to(roomId).broadcast.emit("user-connected", userId);
     }, 1000)
     socket.on("message", (message) => {
@@ -37,3 +37,4 @@ io.on("connection", (socket) => {
 });
 
 server.listen(process.env.PORT || 3030);
+module.exports = server
